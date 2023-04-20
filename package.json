@@ -6,5 +6,11 @@
   "repository": "https://github.com/mwangaben/mwangaben-form-object",
   "author": "Benedict Mwanga",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
 }
