@@ -1,9 +1,5 @@
 import _ from "lodash";
-import { CallableString, ErrorType } from "src/typings/index";
-
-export interface ErrorType {
-  [name: string]: [string];
-}
+import { CallableString, ErrorType } from "./typings/index";
 
 interface WithV {
   [key: string]: any;
@@ -55,12 +51,18 @@ class MyForm implements WithV {
     return _.isEmpty(this.error);
   }
 
+  clearInput(field: string) {
+    this[field] = "";
+    this.defaults[field] = "";
+  }
+
   reset() {
     const fields = Object.keys(this.defaults);
 
     _.forEach(fields, (value: string) => {
       // this[value] = ''
       this.defaults[value] = "";
+      this[value] = "";
 
       // if(!this.prototype.hasOwnProperty('defaults')){
       // Object.assign(this.defaults, this[value]= '' )
