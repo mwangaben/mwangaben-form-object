@@ -1,0 +1,10 @@
+{
+  "name": "mwangaben-form-object",
+  "version": "1.0.0",
+  "description": "Laravel Javascript Form Object",
+  "main": "index.js",
+  "repository": "https://github.com/mwangaben/mwangaben-form-object",
+  "author": "Benedict Mwanga",
+  "license": "MIT",
+  "private": false
+}
