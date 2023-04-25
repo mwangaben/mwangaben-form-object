@@ -1,8 +1,9 @@
 {
   "name": "mwangaben-form-object",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Laravel Javascript Form Object",
   "main": "index.js",
+  "types": "./dist/Form.d.ts",
   "type": "module",
   "scripts": {
     "test": "jest test/Form.spec.js --watch",
@@ -19,6 +20,7 @@
     "@babel/preset-env": "^7.21.4",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-typescript": "^11.1.0",
+    "@types/lodash": "^4.14.194",
     "expect": "^29.5.0",
     "jest": "^29.5.0",
     "rollup": "^3.20.6",
