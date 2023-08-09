@@ -78,8 +78,12 @@ class MyForm implements WithV {
 
   removeProperties(fields: string[]) {
     fields.forEach((field) => {
-      delete this[field];
-      delete this.defaults[field];
+      if (this.hasOwnProperty(field)) {
+        delete this[field];
+      }
+      if (this.defaults.hasOwnProperty(field)) {
+        delete this.defaults[field];
+      }
     });
   }
 }

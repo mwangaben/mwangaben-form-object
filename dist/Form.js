@@ -83,8 +83,12 @@ var MyForm = /*#__PURE__*/function () {
     value: function removeProperties(fields) {
       var _this2 = this;
       fields.forEach(function (field) {
-        delete _this2[field];
-        delete _this2.defaults[field];
+        if (_this2.hasOwnProperty(field)) {
+          delete _this2[field];
+        }
+        if (_this2.defaults.hasOwnProperty(field)) {
+          delete _this2.defaults[field];
+        }
       });
     }
   }]);
