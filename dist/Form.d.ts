@@ -21,5 +21,7 @@ declare class MyForm implements WithV {
     any(): boolean;
     clearInput(field: string): void;
     reset(): this;
+    removeProperty(field: string): void;
+    removeProperties(fields: string[]): void;
 }
 export default MyForm;

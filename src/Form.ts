@@ -70,6 +70,18 @@ class MyForm implements WithV {
     });
     return this;
   }
+
+  removeProperty(field: string) {
+    delete this[field];
+    delete this.defaults[field];
+  }
+
+  removeProperties(fields: string[]) {
+    fields.forEach((field) => {
+      delete this[field];
+      delete this.defaults[field];
+    });
+  }
 }
 
 export default MyForm;

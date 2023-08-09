@@ -67,4 +67,33 @@ describe("Laravel Form helper", () => {
 
     expect(form.name).toBe("");
   });
+
+  it("removes the property", () => {
+    const form = new MyForm({
+      name: "hello",
+      age: 30,
+    });
+
+    form.removeProperty("age");
+
+    // console.log(form);
+
+    expect(form.hasOwnProperty("age")).toBeFalsy();
+  });
+
+  it("removes the properties", () => {
+    const form = new MyForm({
+      name: "hello",
+      age: 30,
+      location: "DSM",
+    });
+
+    form.removeProperties(["age", "location"]);
+
+    // console.log(form);
+
+    expect(form.hasOwnProperty("age")).toBeFalsy();
+    expect(form.hasOwnProperty("location")).toBeFalsy();
+    expect(form.hasOwnProperty("name")).toBeTruthy();
+  });
 });

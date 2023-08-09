@@ -72,6 +72,21 @@ var MyForm = /*#__PURE__*/function () {
 
       return this;
     }
+  }, {
+    key: "removeProperty",
+    value: function removeProperty(field) {
+      delete this[field];
+      delete this.defaults[field];
+    }
+  }, {
+    key: "removeProperties",
+    value: function removeProperties(fields) {
+      var _this2 = this;
+      fields.forEach(function (field) {
+        delete _this2[field];
+        delete _this2.defaults[field];
+      });
+    }
   }]);
   return MyForm;
 }();
