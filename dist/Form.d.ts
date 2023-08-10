@@ -23,5 +23,6 @@ declare class MyForm implements WithV {
     reset(): this;
     removeProperty(field: string): void;
     removeProperties(fields: string[]): void;
+    resetToZero(): this;
 }
 export default MyForm;

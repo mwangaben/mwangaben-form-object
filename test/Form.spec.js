@@ -96,4 +96,16 @@ describe("Laravel Form helper", () => {
     expect(form.hasOwnProperty("location")).toBeFalsy();
     expect(form.hasOwnProperty("name")).toBeTruthy();
   });
+
+  it("it reset to zero", () => {
+    const form = new MyForm({
+      age: 23,
+      amount: 2000,
+    });
+
+    form.resetToZero();
+
+    expect(form.age).toEqual(0);
+    expect(form.amount).toEqual(0);
+  });
 });

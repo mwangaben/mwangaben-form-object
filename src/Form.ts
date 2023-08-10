@@ -86,6 +86,21 @@ class MyForm implements WithV {
       }
     });
   }
+
+  resetToZero() {
+    const fields = Object.keys(this.defaults);
+
+    _.forEach(fields, (value: string) => {
+      // this[value] = ''
+      this.defaults[value] = 0;
+      this[value] = 0;
+
+      // if(!this.prototype.hasOwnProperty('defaults')){
+      // Object.assign(this.defaults, this[value]= '' )
+      // }
+    });
+    return this;
+  }
 }
 
 export default MyForm;

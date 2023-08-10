@@ -91,6 +91,22 @@ var MyForm = /*#__PURE__*/function () {
         }
       });
     }
+  }, {
+    key: "resetToZero",
+    value: function resetToZero() {
+      var _this3 = this;
+      var fields = Object.keys(this.defaults);
+      _.forEach(fields, function (value) {
+        // this[value] = ''
+        _this3.defaults[value] = 0;
+        _this3[value] = 0;
+        // if(!this.prototype.hasOwnProperty('defaults')){
+        // Object.assign(this.defaults, this[value]= '' )
+        // }
+      });
+
+      return this;
+    }
   }]);
   return MyForm;
 }();
