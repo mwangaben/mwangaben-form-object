@@ -1,6 +1,6 @@
 {
   "name": "mwangaben-form-object",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Laravel Javascript Form Object",
   "main": "index.js",
   "types": "./dist/Form.d.ts",
