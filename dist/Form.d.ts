@@ -1,28 +1,25 @@
 import { CallableString, ErrorType } from "./typings/index";
-interface WithV {
+interface FormDataDefaults<T = Record<string, any>> {
     [key: string]: any;
-    defaults: {
-        [key: string]: string | number;
-    };
+    defaults: T;
 }
-declare class MyForm implements WithV {
+declare class MyForm<T extends Record<string, any> = Record<string, any>> implements FormDataDefaults<T> {
     [k: string]: any;
     error: ErrorType;
-    defaults: {
-        [key: string]: string | number;
-    };
-    constructor(defaults: {
-        [key: string]: string | number;
-    });
+    defaults: T;
+    constructor(defaults: T);
     hasError(field: string): boolean;
-    errorOut(field: string, callback?: CallableString | null): undefined;
+    errorOut(field: string, callback?: CallableString | null): string | undefined;
     clearAll(): {};
     clear(field: string): void;
     any(): boolean;
-    clearInput(field: string): void;
+    clearInput<K extends keyof T>(field: K): void;
     reset(): this;
-    removeProperty(field: string): void;
-    removeProperties(fields: string[]): void;
+    removeProperty<K extends keyof T>(field: K): void;
+    removeProperties<K extends keyof T>(fields: K[]): void;
     resetToZero(): this;
+    getField<K extends keyof T>(field: K): T[K];
+    setField<K extends keyof T>(field: K, value: T[K]): void;
+    getData(): T;
 }
 export default MyForm;

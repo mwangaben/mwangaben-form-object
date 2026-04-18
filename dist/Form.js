@@ -53,7 +53,8 @@ var MyForm = /*#__PURE__*/function () {
   }, {
     key: "clearInput",
     value: function clearInput(field) {
-      this[field] = "";
+      var fieldName = field;
+      this[fieldName] = "";
       this.defaults[field] = "";
     }
   }, {
@@ -62,20 +63,17 @@ var MyForm = /*#__PURE__*/function () {
       var _this = this;
       var fields = Object.keys(this.defaults);
       _.forEach(fields, function (value) {
-        // this[value] = ''
+        var fieldName = value;
         _this.defaults[value] = "";
-        _this[value] = "";
-        // if(!this.prototype.hasOwnProperty('defaults')){
-        // Object.assign(this.defaults, this[value]= '' )
-        // }
+        _this[fieldName] = "";
       });
-
       return this;
     }
   }, {
     key: "removeProperty",
     value: function removeProperty(field) {
-      delete this[field];
+      var fieldName = field;
+      delete this[fieldName];
       delete this.defaults[field];
     }
   }, {
@@ -83,8 +81,9 @@ var MyForm = /*#__PURE__*/function () {
     value: function removeProperties(fields) {
       var _this2 = this;
       fields.forEach(function (field) {
-        if (_this2.hasOwnProperty(field)) {
-          delete _this2[field];
+        var fieldName = field;
+        if (_this2.hasOwnProperty(fieldName)) {
+          delete _this2[fieldName];
         }
         if (_this2.defaults.hasOwnProperty(field)) {
           delete _this2.defaults[field];
@@ -97,15 +96,37 @@ var MyForm = /*#__PURE__*/function () {
       var _this3 = this;
       var fields = Object.keys(this.defaults);
       _.forEach(fields, function (value) {
-        // this[value] = ''
+        var fieldName = value;
         _this3.defaults[value] = 0;
-        _this3[value] = 0;
-        // if(!this.prototype.hasOwnProperty('defaults')){
-        // Object.assign(this.defaults, this[value]= '' )
-        // }
+        _this3[fieldName] = 0;
       });
-
       return this;
+    }
+    // Helper method to get typed field value
+  }, {
+    key: "getField",
+    value: function getField(field) {
+      return this[field];
+    }
+    // Helper method to set typed field value
+  }, {
+    key: "setField",
+    value: function setField(field, value) {
+      var fieldName = field;
+      this[fieldName] = value;
+      this.defaults[field] = value;
+    }
+    // Get all form data as typed object
+  }, {
+    key: "getData",
+    value: function getData() {
+      var _this4 = this;
+      var data = {};
+      var fields = Object.keys(this.defaults);
+      fields.forEach(function (field) {
+        data[field] = _this4[field];
+      });
+      return data;
     }
   }]);
   return MyForm;

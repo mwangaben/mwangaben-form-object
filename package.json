@@ -9,7 +9,10 @@
     "test": "jest test/Form.spec.js --watch",
     "build": "rollup -c -w"
   },
-  "repository": "https://github.com/mwangaben/mwangaben-form-object",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwangaben/mwangaben-form-object.git"
+  },
   "author": "Benedict Mwanga",
   "license": "MIT",
   "private": false,
