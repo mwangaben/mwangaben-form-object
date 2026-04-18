@@ -103,6 +103,8 @@ describe("Laravel Form helper", () => {
       name: "Benny",
       age: 0,
     });
+    
+
 
     expect(form.age).toEqual(0);
   });

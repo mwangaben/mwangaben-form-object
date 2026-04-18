@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { CallableString, ErrorType } from "./typings/index";
+import { CallableString, ErrorType } from "./typings";
 
 // Generic interface for form data
 interface FormDataDefaults<T = Record<string, any>> {

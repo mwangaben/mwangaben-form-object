@@ -1,4 +1,4 @@
-import { CallableString, ErrorType } from "./typings/index";
+import { CallableString, ErrorType } from "./typings";
 interface FormDataDefaults<T = Record<string, any>> {
     [key: string]: any;
     defaults: T;
