@@ -1,18 +1,20 @@
 import _ from "lodash";
 import { CallableString, ErrorType } from "./typings/index";
 
-interface WithV {
+// Generic interface for form data
+interface FormDataDefaults<T = Record<string, any>> {
   [key: string]: any;
-  defaults: {
-    [key: string]: string | number;
-  };
+  defaults: T;
 }
 
-class MyForm implements WithV {
+class MyForm<T extends Record<string, any> = Record<string, any>>
+  implements FormDataDefaults<T>
+{
   [k: string]: any;
   public error: ErrorType;
-  public defaults;
-  constructor(defaults: { [key: string]: string | number }) {
+  public defaults: T;
+
+  constructor(defaults: T) {
     this.error = {};
     this.defaults = defaults;
     if (this.defaults) {
@@ -20,13 +22,16 @@ class MyForm implements WithV {
     }
   }
 
-  hasError(field: string) {
+  hasError(field: string): boolean {
     return this.error.hasOwnProperty(field);
   }
 
-  errorOut(field: string, callback: CallableString | null = null) {
-    let b;
-    _.forEach(this.error, (sms, key: string) => {
+  errorOut(
+    field: string,
+    callback: CallableString | null = null
+  ): string | undefined {
+    let b: string | undefined;
+    _.forEach(this.error, (sms: [string], key: string) => {
       if (key === field) {
         if (callback) {
           b = callback(sms[0]);
@@ -35,71 +40,87 @@ class MyForm implements WithV {
         }
       }
     });
-
     return b;
   }
 
-  clearAll() {
+  clearAll(): {} {
     return (this.error = {});
   }
 
-  clear(field: string) {
+  clear(field: string): void {
     delete this.error[field];
   }
 
-  any() {
+  any(): boolean {
     return _.isEmpty(this.error);
   }
 
-  clearInput(field: string) {
-    this[field] = "";
-    this.defaults[field] = "";
+  clearInput<K extends keyof T>(field: K): void {
+    const fieldName = field as string;
+    this[fieldName] = "";
+    this.defaults[field] = "" as any;
   }
 
-  reset() {
-    const fields = Object.keys(this.defaults);
+  reset(): this {
+    const fields = Object.keys(this.defaults) as Array<keyof T>;
 
-    _.forEach(fields, (value: string) => {
-      // this[value] = ''
-      this.defaults[value] = "";
-      this[value] = "";
-
-      // if(!this.prototype.hasOwnProperty('defaults')){
-      // Object.assign(this.defaults, this[value]= '' )
-      // }
+    _.forEach(fields, (value: keyof T) => {
+      const fieldName = value as string;
+      this.defaults[value] = "" as any;
+      this[fieldName] = "";
     });
     return this;
   }
 
-  removeProperty(field: string) {
-    delete this[field];
+  removeProperty<K extends keyof T>(field: K): void {
+    const fieldName = field as string;
+    delete this[fieldName];
     delete this.defaults[field];
   }
 
-  removeProperties(fields: string[]) {
+  removeProperties<K extends keyof T>(fields: K[]): void {
     fields.forEach((field) => {
-      if (this.hasOwnProperty(field)) {
-        delete this[field];
+      const fieldName = field as string;
+      if (this.hasOwnProperty(fieldName)) {
+        delete this[fieldName];
       }
-      if (this.defaults.hasOwnProperty(field)) {
+      if (this.defaults.hasOwnProperty(field as string)) {
         delete this.defaults[field];
       }
     });
   }
 
-  resetToZero() {
-    const fields = Object.keys(this.defaults);
+  resetToZero(): this {
+    const fields = Object.keys(this.defaults) as Array<keyof T>;
 
-    _.forEach(fields, (value: string) => {
-      // this[value] = ''
-      this.defaults[value] = 0;
-      this[value] = 0;
-
-      // if(!this.prototype.hasOwnProperty('defaults')){
-      // Object.assign(this.defaults, this[value]= '' )
-      // }
+    _.forEach(fields, (value: keyof T) => {
+      const fieldName = value as string;
+      this.defaults[value] = 0 as any;
+      this[fieldName] = 0;
     });
     return this;
+  }
+
+  // Helper method to get typed field value
+  getField<K extends keyof T>(field: K): T[K] {
+    return this[field as string] as T[K];
+  }
+
+  // Helper method to set typed field value
+  setField<K extends keyof T>(field: K, value: T[K]): void {
+    const fieldName = field as string;
+    this[fieldName] = value;
+    this.defaults[field] = value;
+  }
+
+  // Get all form data as typed object
+  getData(): T {
+    const data = {} as T;
+    const fields = Object.keys(this.defaults) as Array<keyof T>;
+    fields.forEach((field) => {
+      data[field] = this[field as string] as T[typeof field];
+    });
+    return data;
   }
 }
 

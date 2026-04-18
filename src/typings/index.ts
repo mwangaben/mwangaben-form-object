@@ -9,3 +9,6 @@ export interface Callable {
 export interface CallableString {
   (arg: string): string;
 }
+
+// Export the generic form type
+export type FormInstance<T = Record<string, any>> = MyForm<T>;

@@ -1,3 +1,4 @@
+import expect from "expect";
 import MyForm from "../dist/Form";
 import { removeInputWord } from "../dist/utilities";
 
@@ -95,6 +96,15 @@ describe("Laravel Form helper", () => {
     expect(form.hasOwnProperty("age")).toBeFalsy();
     expect(form.hasOwnProperty("location")).toBeFalsy();
     expect(form.hasOwnProperty("name")).toBeTruthy();
+  });
+
+  it("it accept types ", () => {
+    const form = new MyForm({
+      name: "Benny",
+      age: 0,
+    });
+
+    expect(form.age).toEqual(0);
   });
 
   it("it reset to zero", () => {
